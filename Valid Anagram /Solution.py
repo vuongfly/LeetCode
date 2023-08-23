@@ -1,11 +1,18 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        dict_1 = {}
-        dict_2 = {}
-        d = {"a": 3, "b": 2}
-        d1 = {"b": 2, "a": 3}
-        res = all((d1.get(k) == v for k, v in d.items()))
-        return res
+
+        if len(s) != len(t):
+            return False
+
+        dict_s, dict_t = {}, {}
+        for i in range(len(s)):
+            dict_t[t[i]] = 1 + dict_t.get(t[i], 0)
+            dict_s[s[i]] = 1 + dict_s.get(s[i], 0)
+        for j in dict_t:
+            if dict_t[j] != dict_s.get(j, 0):
+                return False
+        return True
+
 
 # Create an instance of the Solution class
 solution = Solution()
